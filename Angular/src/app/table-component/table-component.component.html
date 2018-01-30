@@ -1,0 +1,33 @@
+<div class="container">
+  <h2>Consolidated Table</h2>
+  <p>contains the sample data:</p>            
+  <table class="table table-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Event</th>
+        <th>Medal</th>
+        <th>Venue</th>
+        <th>Year</th>
+      </tr>
+    </thead>
+    <!-- <tbody>
+      <tr *ngFor="let data of dataList">
+        <td>{{data.configId}}</td>
+        <td>{{data.constant}}</td>
+        <td>{{data.value}}</td>
+        <td>{{data.editFlag}}</td>
+      </tr>
+    </tbody> -->
+    <tbody>
+      <tr *ngFor="let winner of winners">
+        <td>{{winner.name | uppercase}}</td>
+        <td>{{winner.event}}</td>
+        <td>{{winner.medal}}</td>
+        <td>{{winner.venue}}</td>
+        <td>{{winner.year}}</td>
+        
+      </tr>
+    </tbody>
+  </table>
+</div>
