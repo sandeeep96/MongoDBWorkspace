@@ -4,11 +4,13 @@
   <table class="table table-condensed">
     <thead>
       <tr>
-        <th>Name</th>
-        <th>Event</th>
-        <th>Medal</th>
-        <th>Venue</th>
-        <th>Year</th>
+        <th>Id</th>
+        <th>Stock</th>
+        <th>Price</th>
+        <th>BidPrice</th>
+        <th>BidVolume</th>
+        <th>OfferPrice</th>
+        <th>OfferVolume</th>
       </tr>
     </thead>
     <!-- <tbody>
@@ -21,11 +23,13 @@
     </tbody> -->
     <tbody>
       <tr *ngFor="let winner of winners">
-        <td>{{winner.name | uppercase}}</td>
-        <td>{{winner.event}}</td>
-        <td>{{winner.medal}}</td>
-        <td>{{winner.venue}}</td>
-        <td>{{winner.year}}</td>
+        <td>{{winner.id}}</td>
+        <td>{{winner.stock}}</td>
+        <td>{{winner.price}}</td>
+        <td>{{winner.BidPrice}}</td>
+        <td>{{winner.BidVolume}}</td>
+        <td>{{winner.OfferPrice}}</td>
+        <td>{{winner.OfferVolume}}</td>
         
       </tr>
     </tbody>
