@@ -11,8 +11,8 @@ export class MyDataService {
     constructor(private http: Http) { }
 
     // private endpointURL = 'http://localhost:3000/winners';  // URL to web api
-    private endpointURL = 'http://172.24.214.51:8085/solr/report/select?q=*:*';
-
+    // private endpointURL = 'http://172.24.214.51:8085/solr/report/select?q=*:*&rows=1000&start=1  ';
+    private endpointURL = 'http://172.24.213.57:8085/solr/report/select?q=*:*&rows=1000&start=1 ';
     private headers = new Headers({'Content-Type': 'application/json','Access-Control-Allow-Origin': '*'});
 
     private options = new RequestOptions({ headers: this.headers });

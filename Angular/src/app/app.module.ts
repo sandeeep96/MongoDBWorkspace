@@ -9,8 +9,15 @@ import { AppComponent } from './app.component';
 import { ErrorComponentComponent } from './error-component/error-component.component';
 import { HomeComponentComponent } from './home-component/home-component.component';
 import { TableComponentComponent } from './table-component/table-component.component';
-
+import {TableModule} from 'primeng/table';
+// import {DataTableModule} from 'primeng/datatable';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MyDataService } from './mydata.service';
+
+import {InputTextModule, GalleriaModule, MenubarModule, CheckboxModule, DialogModule, MessagesModule, GrowlModule,
+  PanelModule, CalendarModule, RadioButtonModule, InputSwitchModule, SelectButtonModule, DataListModule,
+  SplitButtonModule, ButtonModule, DropdownModule, AccordionModule, 
+  TooltipModule } from 'primeng/primeng';
 
 const routes: Routes = [
   { path:'', 
@@ -35,10 +42,17 @@ const routes: Routes = [
     ErrorComponentComponent,
   ],
   imports: [
+    BrowserAnimationsModule,
+    // DataTableModule,
     FormsModule,
     BrowserModule,
     HttpModule,
     ReactiveFormsModule,
+    InputTextModule, GalleriaModule, MenubarModule, CheckboxModule, DialogModule, MessagesModule, GrowlModule,
+  PanelModule, CalendarModule, RadioButtonModule, InputSwitchModule, SelectButtonModule, DataListModule,
+  SplitButtonModule, ButtonModule, DropdownModule, AccordionModule, 
+  TooltipModule,
+    TableModule,
     RouterModule.forRoot(routes),
   ],
   providers: [MyDataService],
