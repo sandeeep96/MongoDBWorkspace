@@ -14,10 +14,10 @@ import {TableModule} from 'primeng/table';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MyDataService } from './mydata.service';
 
-import {InputTextModule, GalleriaModule, MenubarModule, CheckboxModule, DialogModule, MessagesModule, GrowlModule,
-  PanelModule, CalendarModule, RadioButtonModule, InputSwitchModule, SelectButtonModule, DataListModule,
-  SplitButtonModule, ButtonModule, DropdownModule, AccordionModule, 
-  TooltipModule } from 'primeng/primeng';
+import {GalleriaModule,MenubarModule,CheckboxModule,MessagesModule,PanelModule,CalendarModule,RadioButtonModule,
+  InputSwitchModule, SelectButtonModule, DataListModule,SplitButtonModule,AccordionModule,TooltipModule,
+  SliderModule,MultiSelectModule,ContextMenuModule,GrowlModule,DialogModule,ButtonModule,DropdownModule,
+  InputTextModule,TabViewModule,CodeHighlighterModule} from 'primeng/primeng';
 
 const routes: Routes = [
   { path:'', 
@@ -43,16 +43,16 @@ const routes: Routes = [
   ],
   imports: [
     BrowserAnimationsModule,
+    TableModule,
     // DataTableModule,
     FormsModule,
     BrowserModule,
     HttpModule,
     ReactiveFormsModule,
-    InputTextModule, GalleriaModule, MenubarModule, CheckboxModule, DialogModule, MessagesModule, GrowlModule,
-  PanelModule, CalendarModule, RadioButtonModule, InputSwitchModule, SelectButtonModule, DataListModule,
-  SplitButtonModule, ButtonModule, DropdownModule, AccordionModule, 
-  TooltipModule,
-    TableModule,
+    GalleriaModule,MenubarModule,CheckboxModule,MessagesModule,PanelModule,CalendarModule,RadioButtonModule,
+    InputSwitchModule, SelectButtonModule, DataListModule,SplitButtonModule,AccordionModule,TooltipModule,
+    SliderModule,MultiSelectModule,ContextMenuModule,GrowlModule,DialogModule,ButtonModule,DropdownModule,
+    InputTextModule,TabViewModule,CodeHighlighterModule,
     RouterModule.forRoot(routes),
   ],
   providers: [MyDataService],

@@ -16,6 +16,13 @@ export class TableComponentComponent implements OnInit {
   private timerSubscription: AnonymousSubscription;
   private postsSubscription: AnonymousSubscription;
 
+  yearFilter: number;
+
+  yearTimeout: any;
+  year1Filter: number;
+
+  year1Timeout: any;
+
   constructor(private winnerService: MyDataService) { }
 
 
@@ -30,7 +37,8 @@ export class TableComponentComponent implements OnInit {
     this.winnerService.getWinners()
     .subscribe(
       (data) => {
-        this.winners = data});
+        this.winners = data;
+      });
     // console.log("ng init");
     // this.refreshData();
         this.cols = [
@@ -77,9 +85,27 @@ export class TableComponentComponent implements OnInit {
 
   private subscribeToData(): void {
 
-    this.timerSubscription = Observable.timer(1000)
+    this.timerSubscription = Observable.timer(10000)
       .subscribe(() => this.refreshData());
   }
 
 
+  onYearChange(event, dt) {
+    if (this.yearTimeout) {
+        clearTimeout(this.yearTimeout);
+    }
+
+    this.yearTimeout = setTimeout(() => {
+        dt.filter(event.value, 'OfferPrice', 'gt');
+    }, 250);
+}
+onYear1Change(event, dt) {
+  if (this.year1Timeout) {
+      clearTimeout(this.year1Timeout);
+  }
+
+  this.year1Timeout = setTimeout(() => {
+      dt.filter(event.value, 'price', 'gt');
+  }, 250);
+}
 }
