@@ -1,16 +1,18 @@
 /** Data Model */
 export class MyData { 
-    BidPrice:string;
-    BidVolume:String;
-    High:string;
-    Low:string;
-    OfferPrice:string;
-    OfferVolume:string;
-    TradedVolume:String;
+  bidPrice:string;
+    bidVolumn:String;
+    high:string;
+    low:string;
+    offerPrice:string;
+    offerVolumn:string;
+    tradedVolumn:String;
     change:string;
-    id:string;
+    _id:string;
+    _class:string;
     price:string;
     stock:string;
-    _version_:number;
+    modifiedTime:string;
+
   }
 

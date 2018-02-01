@@ -86,7 +86,7 @@
         <tr>
             <th *ngFor="let col of columns" [ngSwitch]="col.field">
                 <input style="width:125px" *ngSwitchCase="'stock'" placeholder="Search" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-                <div *ngSwitchCase="'OfferPrice'">
+                <div *ngSwitchCase="'offerPrice'">
                     {{yearFilter}}
                     <i class="fa fa-close" (click)="yearFilter=null;dt.filter(null, col.field, col.filterMatchMode)" style="cursor:pointer"></i>
                     <p-slider [style]="{'width':'100%','margin-top':'8px'}" [(ngModel)]="yearFilter" [min]="0" [max]="100" (onChange)="onYearChange($event, dt)"></p-slider>

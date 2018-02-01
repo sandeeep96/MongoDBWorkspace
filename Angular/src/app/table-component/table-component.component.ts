@@ -39,25 +39,25 @@ export class TableComponentComponent implements OnInit {
     .subscribe(
       (data) => {
         data.forEach(item=>{
-          if(parseInt(item.id)<=9&&parseInt(item.id)>=0){
-            item.id="00"+item.id;
+          if(parseInt(item._id)<=9&&parseInt(item._id)>=0){
+            item._id="00"+item._id;
           }
-          else if(parseInt(item.id)<=99&&parseInt(item.id)>=10)
-          item.id="0"+item.id;
+          else if(parseInt(item._id)<=99&&parseInt(item._id)>=10)
+          item._id="0"+item._id;
         })
         this.winners = data;
       });
     // console.log("ng init");
     this.refreshData();
         this.cols = [
-          { field: 'id', header: 'Id' },
+          { field: '_id', header: 'Id' },
           { field: 'stock', header: 'Stock' },
           { field: 'price', header: 'Price' },
-          { field: 'OfferPrice', header: 'OfferPrice' },
-          { field: 'OfferVolume', header: 'OfferVolume' },
-          { field: 'BidPrice', header: 'BidPrice' },
-          { field: 'BidVolume', header: 'BidVolume' },
-          { field: 'TradedVolume', header: 'TradedVolume' }
+          { field: 'offerPrice', header: 'OfferPrice' },
+          { field: 'offerVolumn', header: 'OfferVolume' },
+          { field: 'bidPrice', header: 'BidPrice' },
+          { field: 'bidVolumn', header: 'BidVolume' },
+          { field: 'tradedVolumn', header: 'TradedVolume' }
       ];
   }
 
@@ -111,7 +111,7 @@ export class TableComponentComponent implements OnInit {
     }
 
     this.yearTimeout = setTimeout(() => {
-        dt.filter(event.value, 'OfferPrice', 'gt');
+        dt.filter(event.value, 'offerPrice', 'gt');
     }, 250);
 }
 onYear1Change(event, dt) {

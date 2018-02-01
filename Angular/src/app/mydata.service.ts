@@ -14,7 +14,7 @@ export class MyDataService {
     // private endpointURL = 'http://localhost:3000/winners';  // URL to web api
     // private endpointURL = 'http://172.24.214.51:8085/solr/report/select?q=*:*&rows=1000&start=1  ';
     // private endpointURL = 'http://172.24.213.57:8085/solr/report/select?q=*:*&rows=1000&start=1 ';
-    private endpointURL = 'http://172.24.145.47:3000/records ';
+    private endpointURL = 'http://172.24.145.47:3001/stocks/records';
     // private endpointURL = 'http://172.31.100.48:8085/solr/report/select?q=*:*&rows=1000&start=1 ';
     
     private updatedEndpointURL = 'http://172.24.145.47:3000/recordsTop100 ';
