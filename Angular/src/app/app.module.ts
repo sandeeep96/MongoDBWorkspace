@@ -9,12 +9,15 @@ import { AppComponent } from './app.component';
 import { ErrorComponentComponent } from './error-component/error-component.component';
 import { HomeComponentComponent } from './home-component/home-component.component';
 import { TableComponentComponent } from './table-component/table-component.component';
+import { LoginComponentComponent } from './login-component/login-component.component';
 import {TableModule} from 'primeng/table';
+import { UserService } from './user.service';
+
 // import {DataTableModule} from 'primeng/datatable';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MyDataService } from './mydata.service';
 // import {TabViewModule} from 'primeng/tabview';
-
+import { AuthguardGuard } from './authguard.guard';
 import {GalleriaModule,MenubarModule,CheckboxModule,MessagesModule,PanelModule,CalendarModule,RadioButtonModule,
   InputSwitchModule, SelectButtonModule, DataListModule,SplitButtonModule,AccordionModule,TooltipModule,
   SliderModule,MultiSelectModule,ContextMenuModule,GrowlModule,DialogModule,ButtonModule,DropdownModule,
@@ -23,9 +26,13 @@ import { UpdatedTableComponentComponent } from './updated-table-component/update
 
 const routes: Routes = [
   { path:'', 
-    redirectTo: 'home',
+    redirectTo: 'login',
    pathMatch: 'full' },
+  { path:'login', 
+  component:LoginComponentComponent},
   { path:'home', 
+  canActivate:[AuthguardGuard],
+  canActivateChild:[AuthguardGuard],
     component:HomeComponentComponent,
     children:[
       { path:'', redirectTo: 'table', pathMatch: 'full' },
@@ -43,6 +50,7 @@ const routes: Routes = [
     TableComponentComponent,
     ErrorComponentComponent,
     UpdatedTableComponentComponent,
+    LoginComponentComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -58,7 +66,7 @@ const routes: Routes = [
     InputTextModule,TabViewModule,CodeHighlighterModule,
     RouterModule.forRoot(routes),
   ],
-  providers: [MyDataService],
+  providers: [MyDataService,UserService,AuthguardGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
