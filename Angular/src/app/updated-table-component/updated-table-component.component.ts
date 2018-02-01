@@ -5,14 +5,13 @@ import {MyDataService} from '../mydata.service';
 import {MyData} from '../mydata';
 
 @Component({
-  selector: 'app-table-component',
-  templateUrl: './table-component.component.html',
-  styleUrls: ['./table-component.component.css']
+  selector: 'app-updated-table-component',
+  templateUrl: './updated-table-component.component.html',
+  styleUrls: ['./updated-table-component.component.css']
 })
-export class TableComponentComponent implements OnInit {
+export class UpdatedTableComponentComponent implements OnInit {
 
   winners: MyData[] = [];
-  winners1: MyData[] = [];
   cols: any[];
   private timerSubscription: AnonymousSubscription;
   private postsSubscription: AnonymousSubscription;
@@ -35,20 +34,18 @@ export class TableComponentComponent implements OnInit {
   // }
 
   ngOnInit() {
-    this.winnerService.getWinners()
+    this.winnerService.getWinners1()
     .subscribe(
       (data) => {
-        data.forEach(item=>{
-          if(parseInt(item.id)<=9&&parseInt(item.id)>=0){
-            item.id="00"+item.id;
-          }
-          else if(parseInt(item.id)<=99&&parseInt(item.id)>=10)
-          item.id="0"+item.id;
-        })
         this.winners = data;
+      }, function (error) {
+        console.log(error);
+      },
+      function () {
+        console.log("completed");
       });
     // console.log("ng init");
-    this.refreshData();
+    // this.refreshData();
         this.cols = [
           { field: 'id', header: 'Id' },
           { field: 'stock', header: 'Stock' },
@@ -77,16 +74,9 @@ export class TableComponentComponent implements OnInit {
   // }
 
   private refreshData(): void {
-    this.postsSubscription = this.winnerService.getWinners1().subscribe(
+    this.postsSubscription = this.winnerService.getWinners().subscribe(
       (data) => {
-        if(data==null){
-          console.log("no new data received")
-        }
-        else{
-          this.winners1 = data;
-          for(let i=0;i<this.winners1.length;i++)
-          this.winners.push(this.winners1[i])
-        }
+        this.winners = data;
         this.subscribeToData();
       },
       function (error) {
@@ -100,7 +90,7 @@ export class TableComponentComponent implements OnInit {
 
   private subscribeToData(): void {
 
-    this.timerSubscription = Observable.timer(1000)
+    this.timerSubscription = Observable.timer(10000)
       .subscribe(() => this.refreshData());
   }
 

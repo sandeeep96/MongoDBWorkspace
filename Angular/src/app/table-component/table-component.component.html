@@ -29,7 +29,7 @@
   </table>
 </div> -->
 
-<h3 style="text-align: center">List of Stocks</h3>
+<h3 style="text-align: center"> Stock Details </h3>
 <!-- <p-table [columns]="cols" [value]="winners" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,20,25,30]">
     
   <ng-template pTemplate="header" let-columns>
@@ -66,24 +66,26 @@
   </ng-template>
 </p-dataTable>  -->
 
-<br>
 
-<p-table #dt [columns]="cols" [value]="winners" [paginator]="true" [rows]="10" [rowsPerPageOptions]="[5,10,20,25,30]">
+
+<p-table #dt [columns]="cols" [value]="winners" [paginator]="true" [rows]="15" [rowsPerPageOptions]="[5,10,15,20,25,30]" sortMode="multiple">
     <ng-template pTemplate="caption">
-        <div style="text-align: right">        
+        <div style="text-align: right">
             <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
-            <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+            <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')"
+                style="width:auto">
         </div>
     </ng-template>
     <ng-template pTemplate="header" let-columns>
         <tr>
-            <th *ngFor="let col of columns">
+            <th *ngFor="let col of columns" [pSortableColumn]="col.field" >
                 {{col.header}}
+                <p-sortIcon [field]="col.field"></p-sortIcon>
             </th>
         </tr>
         <tr>
             <th *ngFor="let col of columns" [ngSwitch]="col.field">
-                <input style="width:125px" *ngSwitchCase="'stock'" placeholder="search" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+                <input style="width:125px" *ngSwitchCase="'stock'" placeholder="Search" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
                 <div *ngSwitchCase="'OfferPrice'">
                     {{yearFilter}}
                     <i class="fa fa-close" (click)="yearFilter=null;dt.filter(null, col.field, col.filterMatchMode)" style="cursor:pointer"></i>

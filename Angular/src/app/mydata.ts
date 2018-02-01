@@ -1,20 +1,12 @@
+/** Data Model */
 export class MyData { 
-    // id: number; 
-    // name: string; 
-    // event:string; 
-    // medal:string; 
-    // venue:string; 
-    // year:number; 
-    // image:string;
-    // image1:string;
-    // description:string;
     BidPrice:string;
-    BidVolume:number;
+    BidVolume:String;
     High:string;
     Low:string;
     OfferPrice:string;
     OfferVolume:string;
-    TradedVolume:number;
+    TradedVolume:String;
     change:string;
     id:string;
     price:string;
