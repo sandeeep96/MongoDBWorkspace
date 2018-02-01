@@ -6,9 +6,11 @@ import * as dotenv from 'dotenv';
 import * as cors from 'cors';
 import * as path from 'path';
 
+import * as router from './routes';
+
 const app = express();
 dotenv.load({path: '.env'});
-const port = (process.env.port || 3000);
+const port = (process.env.SERVER_PORT || 3000);
 app.set('port', port);
 
 // Parsers
@@ -23,18 +25,19 @@ mongoose.Promise = global.Promise;
 const mongodb = mongoose.connect(mongoDbUri);
 
 mongodb.then((db) => {
+
+    app.listen(port, () => {
+        console.log(`Server started and listening on port ${port}`);
+    });
+
     console.log(`Connected to MongoDB @ 27017`);
 
-    // app.use('/api', router);
+    app.use('/stocks', router);
 
     app.get('/', (req, res) => {
         res.json('Hello World!!');
         // res.sendFile(path.join(__dirname, 'dist/index.html'));
     });
-
-    app.listen(port, () => {
-        console.log(`Server started at port ${port}`);
-    });
 }).catch((err) => {
-    console.log(err);
+    console.log('Error Connecting to MongoDB: ' + err.message);
 });
