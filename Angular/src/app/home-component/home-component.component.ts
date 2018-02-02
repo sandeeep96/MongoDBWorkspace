@@ -21,16 +21,16 @@ import 'rxjs/add/operator/distinctUntilChanged';
 })
 export class HomeComponentComponent implements OnInit {
 
-  private searchTerms = new Subject<string>();
   name = '';
   constructor(private user: UserService, private router: Router
   ) { }
 
+  // setting the name of logged in user
   ngOnInit() {
     this.name = this.user.getUserLoggedIn();
-
   }
 
+ // logging out
   LogOut(): void {
     this.user.logout();
     this.router.navigate(['/']);

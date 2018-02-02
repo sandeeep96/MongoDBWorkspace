@@ -13,17 +13,17 @@ import { LoginComponentComponent } from './login-component/login-component.compo
 import { TableModule } from 'primeng/table';
 import { UserService } from './user.service';
 
-// import {DataTableModule} from 'primeng/datatable';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MyDataService } from './mydata.service';
-// import {TabViewModule} from 'primeng/tabview';
 import { AuthguardGuard } from './authguard.guard';
+
 import {
   GalleriaModule, MenubarModule, CheckboxModule, MessagesModule, PanelModule, CalendarModule, RadioButtonModule,
   InputSwitchModule, SelectButtonModule, DataListModule, SplitButtonModule, AccordionModule, TooltipModule,
   SliderModule, MultiSelectModule, ContextMenuModule, GrowlModule, DialogModule, ButtonModule, DropdownModule,
   InputTextModule, TabViewModule, CodeHighlighterModule
 } from 'primeng/primeng';
+
 import { UpdatedTableComponentComponent } from './updated-table-component/updated-table-component.component';
 
 const routes: Routes = [
@@ -62,7 +62,6 @@ const routes: Routes = [
   imports: [
     BrowserAnimationsModule,
     TableModule,
-    // DataTableModule,
     FormsModule,
     BrowserModule,
     HttpModule,

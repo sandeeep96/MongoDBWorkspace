@@ -30,6 +30,7 @@ export class LoginComponentComponent implements OnInit {
     });
   }
 
+  // getting the username and password feilds
   loginUser(forms) {
     this.loading = true;
     // e.preventDefault();
@@ -59,6 +60,8 @@ export class LoginComponentComponent implements OnInit {
         this.loading = false;
       });
   }
+
+// validating username and password against the DB username and password
   validateDetails() {
     if ((this.viewUserName == this.dbUserName) && (this.viewUserPassword == this.dbUserPassword)) {
       console.log("inside if");

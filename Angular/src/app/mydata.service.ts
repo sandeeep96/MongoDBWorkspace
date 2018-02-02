@@ -13,12 +13,13 @@ export class MyDataService {
 
   private endpointURL = 'http://172.24.145.47:3001/stocks/records';
 
-  private updatedEndpointURL = 'http://172.24.145.47:3000/recordsTop100 ';
+  private updatedEndpointURL = 'http://172.24.145.47:3001/recordsTop100 ';
 
   private headers = new Headers({ 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' });
 
   private options = new RequestOptions({ headers: this.headers });
 
+  /** Method which gets the main data */
   getWinners(): Observable<MyData[]> {
     return this.http.get(this.endpointURL)
       .map(response => {
@@ -32,6 +33,7 @@ export class MyDataService {
       .catch(this.handleError);
   }
 
+    /** Method which gets the refreshed data */
   getWinners1(): Observable<MyData[]> {
     return this.http.get(this.updatedEndpointURL)
       .map(response => {

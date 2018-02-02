@@ -16,16 +16,14 @@ export class TableComponentComponent implements OnInit {
   cols: any[];
   private timerSubscription: AnonymousSubscription;
   private postsSubscription: AnonymousSubscription;
-
   yearFilter: number;
-
   yearTimeout: any;
   year1Filter: number;
-
   year1Timeout: any;
 
   constructor(private winnerService: MyDataService) { }
 
+  // loads columns and loads data in table and also refreshes data
   ngOnInit() {
     this.winnerService.getWinners()
       .subscribe(
@@ -39,7 +37,7 @@ export class TableComponentComponent implements OnInit {
         })
         this.winners = data;
       });
-    // console.log("ng init");
+    console.log("ng init");
     this.refreshData();
     this.cols = [
       { field: '_id', header: 'Id' },
@@ -53,6 +51,7 @@ export class TableComponentComponent implements OnInit {
     ];
   }
 
+  // unsubscribes the observable on moving away from componenet
   public ngOnDestroy(): void {
     console.log("ng destroy");
     if (this.postsSubscription) {
@@ -63,6 +62,7 @@ export class TableComponentComponent implements OnInit {
     }
   }
 
+  // checks for new data & adds to main data if any or prints no new data received when no new data is received
   private refreshData(): void {
     this.postsSubscription = this.winnerService.getWinners1().subscribe(
       (data) => {
@@ -85,18 +85,17 @@ export class TableComponentComponent implements OnInit {
     );
   }
 
+  // timer for every 1 sec
   private subscribeToData(): void {
-
     this.timerSubscription = Observable.timer(1000)
       .subscribe(() => this.refreshData());
   }
 
-
+  // Methods for 2 sliders
   onYearChange(event, dt) {
     if (this.yearTimeout) {
       clearTimeout(this.yearTimeout);
     }
-
     this.yearTimeout = setTimeout(() => {
       dt.filter(event.value, 'offerPrice', 'gt');
     }, 250);
@@ -105,7 +104,6 @@ export class TableComponentComponent implements OnInit {
     if (this.year1Timeout) {
       clearTimeout(this.year1Timeout);
     }
-
     this.year1Timeout = setTimeout(() => {
       dt.filter(event.value, 'price', 'gt');
     }, 250);
