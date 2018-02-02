@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {UserService} from '../user.service';
+import { UserService } from '../user.service';
 import { Router } from '@angular/router';
-import {User} from '../user';
+import { User } from '../user';
 import { FormGroup, FormControl } from '@angular/forms';
-import {Validators} from '@angular/forms';
+import { Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login-component',
@@ -12,10 +12,10 @@ import {Validators} from '@angular/forms';
 })
 export class LoginComponentComponent implements OnInit {
 
-  userMsg:boolean=false;
+  userMsg: boolean = false;
   loading = false;
 
-  constructor(public router: Router, private user:UserService) { }
+  constructor(public router: Router, private user: UserService) { }
 
   dbUserName;
   dbUserPassword;
@@ -24,49 +24,49 @@ export class LoginComponentComponent implements OnInit {
   forms;
   ngOnInit() {
     console.log('hit on login component');
-    this.forms= new FormGroup({
-      User:new FormControl("") ,
-      Password:new FormControl("") ,
-        });
+    this.forms = new FormGroup({
+      User: new FormControl(""),
+      Password: new FormControl(""),
+    });
   }
 
   loginUser(forms) {
     this.loading = true;
-  	// e.preventDefault();
+    // e.preventDefault();
     //console.log(forms.User,forms.Password);
-  	// this.viewUser.name = e.target.elements[1].value;
+    // this.viewUser.name = e.target.elements[1].value;
     // this.viewUser.password = e.target.elements[2].value;
-    this.viewUserName=forms.User;
-    this.viewUserPassword=forms.Password;
-    console.log("view---"+this.viewUserName,this.viewUserPassword);
+    this.viewUserName = forms.User;
+    this.viewUserPassword = forms.Password;
+    console.log("view---" + this.viewUserName, this.viewUserPassword);
     this.user.getUserDetails(this.viewUserName)
-    .then(data=>{
-      // console.log(data);
-      // console.log(data[0].name);
-      // console.log(data[0].password);
-      this.dbUserName=data[0].name;
-      this.dbUserPassword=data[0].password;
-      console.log("db---"+this.dbUserName,this.dbUserPassword);
-      // this.dbUser=data;
-      // console.log("db"+this.dbUser.name);
-      // console.log("db"+this.dbUser.password);
-      this.validateDetails();
-      
-    }).catch(error => {
-      // TODO: add real error handling
-      //console.log(error);
-          this.userMsg=true;
-          this.loading = false;
-    }); 
+      .then(data => {
+        // console.log(data);
+        // console.log(data[0].name);
+        // console.log(data[0].password);
+        this.dbUserName = data[0].name;
+        this.dbUserPassword = data[0].password;
+        console.log("db---" + this.dbUserName, this.dbUserPassword);
+        // this.dbUser=data;
+        // console.log("db"+this.dbUser.name);
+        // console.log("db"+this.dbUser.password);
+        this.validateDetails();
+
+      }).catch(error => {
+        // TODO: add real error handling
+        //console.log(error);
+        this.userMsg = true;
+        this.loading = false;
+      });
   }
-   validateDetails(){
-    if((this.viewUserName == this.dbUserName)&&(this.viewUserPassword == this.dbUserPassword)) {
+  validateDetails() {
+    if ((this.viewUserName == this.dbUserName) && (this.viewUserPassword == this.dbUserPassword)) {
       console.log("inside if");
       this.user.setUserLoggedIn(this.viewUserName);
       this.router.navigate(['home']);
     }
-    else{
-      this.userMsg=true;
+    else {
+      this.userMsg = true;
       this.loading = false;
       console.log('inside else');
     }

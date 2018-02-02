@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AnonymousSubscription } from "rxjs/Subscription";
 import { Observable } from 'rxjs/Rx';
-import {MyDataService} from '../mydata.service';
-import {MyData} from '../mydata';
+import { MyDataService } from '../mydata.service';
+import { MyData } from '../mydata';
 
 @Component({
   selector: 'app-table-component',
@@ -26,39 +26,31 @@ export class TableComponentComponent implements OnInit {
 
   constructor(private winnerService: MyDataService) { }
 
-
-  // ngOnInit() {
-  //   this.winnerService.getWinners()
-  //   .subscribe(
-  //     (data) => {
-  //       this.winners = data});
-  // }
-
   ngOnInit() {
     this.winnerService.getWinners()
-    .subscribe(
+      .subscribe(
       (data) => {
-        data.forEach(item=>{
-          if(parseInt(item._id)<=9&&parseInt(item._id)>=0){
-            item._id="00"+item._id;
+        data.forEach(item => {
+          if (parseInt(item._id) <= 9 && parseInt(item._id) >= 0) {
+            item._id = "00" + item._id;
           }
-          else if(parseInt(item._id)<=99&&parseInt(item._id)>=10)
-          item._id="0"+item._id;
+          else if (parseInt(item._id) <= 99 && parseInt(item._id) >= 10)
+            item._id = "0" + item._id;
         })
         this.winners = data;
       });
     // console.log("ng init");
     this.refreshData();
-        this.cols = [
-          { field: '_id', header: 'Id' },
-          { field: 'stock', header: 'Stock' },
-          { field: 'price', header: 'Price' },
-          { field: 'offerPrice', header: 'OfferPrice' },
-          { field: 'offerVolumn', header: 'OfferVolume' },
-          { field: 'bidPrice', header: 'BidPrice' },
-          { field: 'bidVolumn', header: 'BidVolume' },
-          { field: 'tradedVolumn', header: 'TradedVolume' }
-      ];
+    this.cols = [
+      { field: '_id', header: 'Id' },
+      { field: 'stock', header: 'Stock' },
+      { field: 'price', header: 'Price' },
+      { field: 'offerPrice', header: 'OfferPrice' },
+      { field: 'offerVolumn', header: 'OfferVolume' },
+      { field: 'bidPrice', header: 'BidPrice' },
+      { field: 'bidVolumn', header: 'BidVolume' },
+      { field: 'tradedVolumn', header: 'TradedVolume' }
+    ];
   }
 
   public ngOnDestroy(): void {
@@ -71,21 +63,16 @@ export class TableComponentComponent implements OnInit {
     }
   }
 
-    // ngOnInit() {
-  //   console.log("ng init");
-  //   this.refreshData();
-  // }
-
   private refreshData(): void {
     this.postsSubscription = this.winnerService.getWinners1().subscribe(
       (data) => {
-        if(data==null){
+        if (data == null) {
           console.log("no new data received")
         }
-        else{
+        else {
           this.winners1 = data;
-          for(let i=0;i<this.winners1.length;i++)
-          this.winners.push(this.winners1[i])
+          for (let i = 0; i < this.winners1.length; i++)
+            this.winners.push(this.winners1[i])
         }
         this.subscribeToData();
       },
@@ -107,20 +94,20 @@ export class TableComponentComponent implements OnInit {
 
   onYearChange(event, dt) {
     if (this.yearTimeout) {
-        clearTimeout(this.yearTimeout);
+      clearTimeout(this.yearTimeout);
     }
 
     this.yearTimeout = setTimeout(() => {
-        dt.filter(event.value, 'offerPrice', 'gt');
+      dt.filter(event.value, 'offerPrice', 'gt');
     }, 250);
-}
-onYear1Change(event, dt) {
-  if (this.year1Timeout) {
-      clearTimeout(this.year1Timeout);
   }
+  onYear1Change(event, dt) {
+    if (this.year1Timeout) {
+      clearTimeout(this.year1Timeout);
+    }
 
-  this.year1Timeout = setTimeout(() => {
+    this.year1Timeout = setTimeout(() => {
       dt.filter(event.value, 'price', 'gt');
-  }, 250);
-}
+    }, 250);
+  }
 }

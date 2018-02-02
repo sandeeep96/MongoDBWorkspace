@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import {UserService} from '../user.service';
+import { UserService } from '../user.service';
 
 import { Subject } from 'rxjs/Subject';
 import { Router } from '@angular/router';
@@ -23,7 +23,7 @@ export class HomeComponentComponent implements OnInit {
 
   private searchTerms = new Subject<string>();
   name = '';
-  constructor(private user: UserService,private router: Router
+  constructor(private user: UserService, private router: Router
   ) { }
 
   ngOnInit() {
@@ -31,7 +31,7 @@ export class HomeComponentComponent implements OnInit {
 
   }
 
-  LogOut():void{
+  LogOut(): void {
     this.user.logout();
     this.router.navigate(['/']);
   }
