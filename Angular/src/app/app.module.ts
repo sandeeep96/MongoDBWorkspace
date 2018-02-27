@@ -25,6 +25,8 @@ import {
 } from 'primeng/primeng';
 
 import { UpdatedTableComponentComponent } from './updated-table-component/updated-table-component.component';
+import { CountryService } from './shared/country.service';
+import { JsonRulesService } from './shared/json-rules.service';
 
 const routes: Routes = [
   {
@@ -72,7 +74,7 @@ const routes: Routes = [
     InputTextModule, TabViewModule, CodeHighlighterModule,
     RouterModule.forRoot(routes),
   ],
-  providers: [MyDataService, UserService, AuthguardGuard],
+  providers: [MyDataService, UserService, AuthguardGuard, CountryService, JsonRulesService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

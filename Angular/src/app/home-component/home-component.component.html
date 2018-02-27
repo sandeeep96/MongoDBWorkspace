@@ -24,5 +24,19 @@
   </nav>
   <br>
 
+  <h2>Select the Task ID to Evaluate</h2>
+
+  <div>Task ID:
+    <select [(ngModel)]="userName" (click)="getUserInfo()">
+      <option value=""> select </option>
+      <option *ngFor="let user of users" value="{{user.id}}"> {{user.id}} </option>
+    </select>
+
+    <div *ngIf="userName">
+      <h3>{{result}}</h3>
+
+    </div>
+  </div>
+
   <router-outlet></router-outlet>
 </div>

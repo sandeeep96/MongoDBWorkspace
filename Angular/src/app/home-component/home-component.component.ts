@@ -13,6 +13,12 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
+import { CountryService } from '../shared/country.service';
+
+// Import json-rules-engine implementation
+import { JsonRulesService } from '../shared/json-rules.service';
+
+declare var runRulesForCriteriaMatching: any;
 
 @Component({
   selector: 'app-home-component',
@@ -21,19 +27,46 @@ import 'rxjs/add/operator/distinctUntilChanged';
 })
 export class HomeComponentComponent implements OnInit {
 
+  public users: any;
+  public userName: string;
+  public userObj: any;
+  public result:string;
+
   name = '';
-  constructor(private user: UserService, private router: Router
+  constructor(
+    private user: UserService,
+    private router: Router,
+    private countryService: CountryService,
+    private jsonRulesImpl: JsonRulesService
   ) { }
 
   // setting the name of logged in user
   ngOnInit() {
     this.name = this.user.getUserLoggedIn();
+    this.countryService.getUsers().subscribe(res => { 
+      console.log(res.json()); 
+      this.users = res.json(); 
+    });
   }
 
- // logging out
+  // logging out
   LogOut(): void {
     this.user.logout();
     this.router.navigate(['/']);
+  }
+
+  public getUserInfo() {
+    this.countryService.getUserDetails(this.userName).subscribe(res => {
+      this.userObj = res.json();
+      this.jsonRulesImpl.applyFactsAndRunRuleCheckEngine(this.userObj)
+        .then((response) => {
+          this.result = response[0].params.message;
+        })
+        .catch(() => {
+          this.result = 'None';
+        });
+
+    });
   }
 
 }

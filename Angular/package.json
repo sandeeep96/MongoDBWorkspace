@@ -5,6 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "concurrently --kill-others \"ng serve -o --port 4300\" \"json-server --watch --port 3100 JSON_DATA/mydata.json\" \"npm run server-start\"",
+    "start-alt": "concurrently --kill-others \"ng serve -o --port 4300\" \"json-server --watch --port 3100 JSON_DATA/mydata.json\"",
     "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
