@@ -60,7 +60,15 @@ export class HomeComponentComponent implements OnInit {
       this.userObj = res.json();
       this.jsonRulesImpl.applyFactsAndRunRuleCheckEngine(this.userObj)
         .then((response) => {
-          this.result = response[0].params.message;
+          console.log(response);
+          if (response[0].params.gtValue) {
+            this.result = response[0].params.message + response[0].params.gtValue;
+          }            
+          else if (response[0].params.newId) {
+            this.result = response[0].params.message + response[0].params.newId;
+          } else {
+            this.result = response[0].params.message;
+          }
         })
         .catch(() => {
           this.result = 'None';

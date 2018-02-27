@@ -11,12 +11,14 @@ export class JsonRulesService {
     private rule1;
     private rule2;
 
+    private user: any;
+
     constructor() {
         this.engine = new Engine();
         this.event1 = {
             type: 'first-criteria-met',
             params: {
-                message: 'The selected User ID is 1!!'
+                message: 'The selected User ID is 1 and new id is '
             }
         };
     
@@ -32,7 +34,7 @@ export class JsonRulesService {
         this.event2 = {
             type: 'greaterThan-criteria-met',
             params: {
-                message: 'Value greater than 12!!'
+                message: 'Value greater than 12 by '
             }
         };
 
@@ -52,16 +54,17 @@ export class JsonRulesService {
         this.engine.addRule(this.rule2);
 
         this.engine.on('first-criteria-met', (params) => {
-            return params.message;
+            params.newId = this.user.id + 10;
         });
 
         this.engine.on('greaterThan-criteria-met', (params) => {
-            return params.message;
+            params.gtValue = this.user.id - 12;
         });
     }
 
     public applyFactsAndRunRuleCheckEngine(userObject): Promise<any> {
         this.engine.addFact('user-information', userObject);
+        this.user = userObject;
         return this.engine.run();
     }
         
